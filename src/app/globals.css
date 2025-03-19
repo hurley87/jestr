@@ -1,0 +1,255 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* Define the font-pixel utility */
+.font-pixel {
+  font-family: var(--font-pixel);
+}
+
+:root {
+  /* Basic colors */
+  --primary: #FF5757;
+  --secondary: #FFD700;
+  --accent: #4A90E2;
+
+  /* HSL values for shadcn/ui */
+  --card: 0 0% 12%;
+  --card-foreground: 0 0% 98%;
+  --popover: 0 0% 12%;
+  --popover-foreground: 0 0% 98%;
+  --primary: 0 85% 67%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 50 100% 50%;
+  --secondary-foreground: 0 0% 12%;
+  --muted: 0 0% 20%;
+  --muted-foreground: 0 0% 70%;
+  --accent: 215 74% 59%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 85% 60%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 0 0% 20%;
+  --input: 0 0% 20%;
+  --ring: 215 74% 59%;
+  --radius: 0.5rem;
+
+  /* Jestr specific colors */
+  --jestr-red: #FF5757;
+  --jestr-yellow: #FFD700;
+  --jestr-blue: #4A90E2;
+  --jestr-green: #50E3C2;
+  --jestr-purple: #B15DFF;
+  --jestr-background: #121212;
+  --jestr-card: #1E1E1E;
+  --jestr-accent: #4A90E2;
+  --jestr-border: hsl(0 0% 20%);
+  --jestr-input: hsl(0 0% 20%);
+  --jestr-ring: hsl(215 74% 59%);
+  --jestr-foreground: hsl(0 0% 98%);
+  --jestr-muted: hsl(0 0% 20%);
+  --jestr-muted-foreground: hsl(0 0% 70%);
+  --jestr-accent-foreground: #FFFFFF;
+  --jestr-destructive: hsl(0 85% 60%);
+  --jestr-destructive-foreground: hsl(0 0% 98%);
+
+  /* Animation specific colors */
+  --jestr-animation: hsl(0 85% 67%);
+  --jestr-animation-foreground: hsl(0 0% 100%);
+  --jestr-animation-muted: hsl(0 0% 20%);
+  --jestr-animation-muted-foreground: hsl(0 0% 70%);
+  --jestr-animation-accent: hsl(215 74% 59%);
+  --jestr-animation-accent-foreground: hsl(0 0% 100%);
+  --jestr-animation-destructive: hsl(0 85% 60%);
+  --jestr-animation-destructive-foreground: hsl(0 0% 98%);
+  --jestr-animation-border: hsl(0 0% 20%);
+  --jestr-animation-input: hsl(0 0% 20%);
+  --jestr-animation-ring: hsl(215 74% 59%);
+
+  /* Font variables */
+  --font-sans: system-ui, sans-serif;
+  --font-mono: ui-monospace, monospace;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+/* Custom classes for jestr colors */
+.text-jestr-red { color: var(--jestr-red); }
+.text-jestr-yellow { color: var(--jestr-yellow); }
+.text-jestr-blue { color: var(--jestr-blue); }
+.text-jestr-green { color: var(--jestr-green); }
+.text-jestr-purple { color: var(--jestr-purple); }
+.text-jestr-accent { color: var(--jestr-accent); }
+
+.bg-jestr-red { background-color: var(--jestr-red); }
+.bg-jestr-yellow { background-color: var(--jestr-yellow); }
+.bg-jestr-blue { background-color: var(--jestr-blue); }
+.bg-jestr-green { background-color: var(--jestr-green); }
+.bg-jestr-purple { background-color: var(--jestr-purple); }
+.bg-jestr-accent { background-color: var(--jestr-accent); }
+.bg-jestr-background { background-color: var(--jestr-background); }
+.bg-jestr-card { background-color: var(--jestr-card); }
+
+.border-jestr-red { border-color: var(--jestr-red); }
+.border-jestr-yellow { border-color: var(--jestr-yellow); }
+.border-jestr-blue { border-color: var(--jestr-blue); }
+.border-jestr-green { border-color: var(--jestr-green); }
+.border-jestr-purple { border-color: var(--jestr-purple); }
+.border-jestr-accent { border-color: var(--jestr-accent); }
+.border-jestr-border { border-color: var(--jestr-border); }
+
+/* Animation classes */
+@keyframes accordion-down {
+  from { height: 0; }
+  to { height: var(--radix-accordion-content-height); }
+}
+
+@keyframes accordion-up {
+  from { height: var(--radix-accordion-content-height); }
+  to { height: 0; }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
+  20%, 40%, 60%, 80% { transform: translateX(2px); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.animate-accordion-down { animation: accordion-down 0.2s ease-out; }
+.animate-accordion-up { animation: accordion-up 0.2s ease-out; }
+.animate-shake { animation: shake 0.5s ease-in-out; }
+.animate-float { animation: float 3s ease-in-out infinite; }
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Component styles */
+.pixel-border {
+  border-width: 4px;
+  border-color: black;
+  box-shadow: 4px 4px 0px 0px rgba(0,0,0,1);
+}
+
+.pixel-button {
+  font-family: var(--font-pixel);
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-width: 4px;
+  border-color: black;
+  box-shadow: 4px 4px 0px 0px rgba(0,0,0,1);
+  transition-property: all;
+  transition-duration: 100ms;
+}
+.pixel-button:active {
+  box-shadow: 2px 2px 0px 0px rgba(0,0,0,1);
+  transform: translateX(2px) translateY(2px);
+}
+
+.gameboy-container {
+  background-color: var(--jestr-card);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  border-width: 4px;
+  border-color: black;
+  box-shadow: 8px 8px 0px 0px rgba(0,0,0,0.5);
+}
+
+
