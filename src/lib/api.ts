@@ -1,4 +1,4 @@
-import { Token } from '@/app/page';
+import { Token } from '@/types';
 
 /**
  * Fetches all tokens from the API with optional cursor for pagination
