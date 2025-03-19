@@ -9,7 +9,7 @@ import { useState } from 'react';
 import { Token } from '@/types';
 
 export function JestCard({ jest }: { jest: Token }) {
-  const [timeRemaining, setTimeRemaining] = useState<string>('');
+  // const [timeRemaining, setTimeRemaining] = useState<string>('');
   const [animate, setAnimate] = useState(false);
 
   // useEffect(() => {
@@ -90,9 +90,9 @@ export function JestCard({ jest }: { jest: Token }) {
           <div className="flex justify-between items-center">
             <div className="text-xs">
               <span className="text-muted-foreground">Time left: </span>
-              <span className="font-pixel text-jestr-yellow">
+              {/* <span className="font-pixel text-jestr-yellow">
                 {timeRemaining}
-              </span>
+              </span> */}
             </div>
 
             <Button
