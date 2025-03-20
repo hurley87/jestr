@@ -43,3 +43,76 @@ export const getPublicKey = async (agentId: string): Promise<string> => {
   const data = await response.json();
   return data.walletPublicKey;
 };
+
+/**
+ * Checks the presale expiration status for a Solana agent
+ * @param agentId - The ID of the agent to check
+ * @returns An object containing expiration information
+ */
+export const checkPresaleExpiration = async (
+  agentId: string
+): Promise<{
+  hasExpired: boolean;
+  minutesLeft: number;
+  totalMinutes: number;
+  timeRemaining: string;
+  error?: string;
+}> => {
+  if (!agentId) {
+    return {
+      hasExpired: true,
+      minutesLeft: 0,
+      totalMinutes: 0,
+      timeRemaining: '0m',
+      error: 'Missing agent ID',
+    };
+  }
+
+  const url = `${process.env.CIRCUS_API_URL}/solana/agent/presale/check-expiration?agent_id=${agentId}`;
+
+  try {
+    const response = await fetch(url, {
+      headers: {
+        'x-api-key': `${process.env.CIRCUS_API_KEY}`,
+      },
+    });
+
+    if (!response.ok) {
+      const errorMessage = `Failed to check presale expiration: ${response.statusText}`;
+      console.error(errorMessage);
+      return {
+        hasExpired: true,
+        minutesLeft: 0,
+        totalMinutes: 0,
+        timeRemaining: '0m',
+        error: errorMessage,
+      };
+    }
+
+    const data = await response.json();
+    const minutesLeft = data.minutesLeft || 0;
+
+    // Return '0m' if expired or no time left
+    const timeRemaining =
+      data.expired || minutesLeft <= 0 ? '0m' : `${minutesLeft}m`;
+
+    return {
+      hasExpired: data.expired,
+      minutesLeft: minutesLeft,
+      totalMinutes: data.totalMinutes || 0,
+      timeRemaining,
+    };
+  } catch (error) {
+    const errorMessage =
+      error instanceof Error ? error.message : 'Unknown error occurred';
+    console.error('Error checking presale expiration:', errorMessage);
+
+    return {
+      hasExpired: true,
+      minutesLeft: 0,
+      totalMinutes: 0,
+      timeRemaining: '0m',
+      error: errorMessage,
+    };
+  }
+};

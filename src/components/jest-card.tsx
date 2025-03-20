@@ -1,42 +1,20 @@
-'use client';
-
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
 import { Token } from '@/types';
+import { checkPresaleExpiration } from '@/lib/utils';
 
-export function JestCard({ jest }: { jest: Token }) {
-  // const [timeRemaining, setTimeRemaining] = useState<string>('');
-  const [animate, setAnimate] = useState(false);
-
-  // useEffect(() => {
-  //   const timer = setInterval(() => {
-  //     setTimeRemaining(formatTimeRemaining(jest.endTime));
-  //   }, 1000);
-
-  //   return () => clearInterval(timer);
-  // }, [endTime]);
-
-  // const progress = (jest.balance / jest.launchAmount) * 100;
-
-  console.log('jest', jest);
-
-  const handleContribute = () => {
-    setAnimate(true);
-    setTimeout(() => setAnimate(false), 500);
-  };
+export async function JestCard({ jest }: { jest: Token }) {
+  const expiration = await checkPresaleExpiration(jest.agentId);
 
   const progress = (Number(jest.balance) / 10) * 100;
 
   return (
     <Link href={`/jest/${jest.ownerPublicKey}/${jest.agentId}`}>
       <Card
-        className={`gameboy-container overflow-hidden transition-all duration-300 hover:translate-y-[-4px] ${
-          animate ? 'animate-shake' : ''
-        }`}
+        className={`gameboy-container overflow-hidden transition-all duration-300 hover:translate-y-[-4px]`}
       >
         <CardContent className="p-2 sm:p-3 space-y-2 sm:space-y-3">
           <div className="space-y-1">
@@ -91,21 +69,18 @@ export function JestCard({ jest }: { jest: Token }) {
           </div>
 
           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 sm:gap-0">
-            <div className="text-xs">
-              <span className="text-muted-foreground">Time left: </span>
-              {/* <span className="font-pixel text-jestr-yellow">
-                {timeRemaining}
-              </span> */}
+            <div>
+              <span className="text-muted-foreground text-xs">Time left: </span>
+              <span
+                className={`font-pixel text-lg ${
+                  expiration.error ? 'text-red-500' : 'text-jestr-yellow'
+                }`}
+              >
+                {expiration.timeRemaining}
+              </span>
             </div>
 
-            <Button
-              className="w-full sm:w-auto bg-jestr-purple hover:bg-jestr-purple/80 font-pixel text-lg sm:text-xl md:text-2xl py-1 sm:py-2 text-black font-bold cursor-pointer"
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                handleContribute();
-              }}
-            >
+            <Button className="w-full sm:w-auto bg-jestr-purple hover:bg-jestr-purple/80 font-pixel text-lg sm:text-xl md:text-2xl py-1 sm:py-2 text-black font-bold cursor-pointer">
               Contribute {jest.balance} SOL
             </Button>
           </div>
