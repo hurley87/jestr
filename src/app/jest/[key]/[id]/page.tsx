@@ -9,6 +9,13 @@ import { formatSOL } from '@/lib/utils';
 import { ArrowLeft, Share2, ExternalLink } from 'lucide-react';
 import { Token } from '@/types';
 
+interface Contributor {
+  username: string;
+  avatar?: string;
+  contribution?: string;
+  timestamp?: number;
+}
+
 interface JestDetailProps {
   params: Promise<{
     id: string;
@@ -16,7 +23,9 @@ interface JestDetailProps {
   }>;
 }
 
-export const getContributors = async (tokenId: string): Promise<any[]> => {
+export const getContributors = async (
+  tokenId: string
+): Promise<Contributor[]> => {
   try {
     const url = `${process.env.CIRCUS_API_URL}/solana/agent/presale/get-contributions?agent_id=${tokenId}`;
     const response = await fetch(url, {
@@ -199,12 +208,12 @@ export default async function JestDetail({ params }: JestDetailProps) {
               </div>
             </div>
 
-            <div>
+            {/* <div>
               <h3 className="font-pixel text-sm text-white mb-3">
                 Contributors
               </h3>
-              {/* <div className="flex flex-wrap gap-2">
-                {contributors.map((contributor, index) => (
+              <div className="flex flex-wrap gap-2">
+                {contributors.map((contributor: Contributor, index: number) => (
                   <div
                     key={index}
                     className="relative h-8 w-8 rounded-full border-2 border-jestr-card overflow-hidden"
@@ -218,8 +227,8 @@ export default async function JestDetail({ params }: JestDetailProps) {
                     />
                   </div>
                 ))}
-              </div> */}
-            </div>
+              </div>
+            </div> */}
 
             <div className="bg-jestr-background/50 rounded-lg p-4">
               <h3 className="font-pixel text-sm text-white mb-2">
