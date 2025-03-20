@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { X, ArchiveIcon } from 'lucide-react';
 import { Connect } from '@/components/connect';
+import Image from 'next/image';
 
 export function Header() {
   return (
@@ -9,42 +9,52 @@ export function Header() {
       <div className="container flex h-16 items-center justify-between mx-auto">
         <div className="flex items-center gap-2">
           <Link href="/">
-            <span className="font-pixel text-sm md:text-base text-jestr-yellow">
+            <span className="font-pixel text-4xl text-jestr-yellow">
               JESTR.WORLD
             </span>
           </Link>
         </div>
 
         <div className="flex items-center gap-4">
-          <Link
-            href="https://twitter.com/jestrworld"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Button
-              variant="ghost"
-              size="icon"
-              className="text-jestr-blue hover:text-jestr-blue/80"
+          <div className="flex items-center gap-1">
+            <Link
+              href="https://twitter.com/jestrworld"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              <X className="h-5 w-5" />
-              <span className="sr-only">X (Twitter)</span>
-            </Button>
-          </Link>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="text-white hover:text-jestr-blue/80"
+              >
+                <Image
+                  src="/twitter.svg"
+                  alt="Twitter"
+                  width={18}
+                  height={18}
+                />
+              </Button>
+            </Link>
 
-          <Link
-            href="https://warpcast.com/jestrworld"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Button
-              variant="ghost"
-              size="icon"
-              className="text-jestr-purple hover:text-jestr-purple/80"
+            <Link
+              href="https://warpcast.com/jestrworld"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              <ArchiveIcon className="h-5 w-5" />
-              <span className="sr-only">Farcaster</span>
-            </Button>
-          </Link>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="text-jestr-purple hover:text-jestr-purple/80"
+              >
+                <Image
+                  src="/warpcast.png"
+                  alt="Farcaster"
+                  width={24}
+                  height={24}
+                />
+              </Button>
+            </Link>
+          </div>
 
           <Connect />
         </div>

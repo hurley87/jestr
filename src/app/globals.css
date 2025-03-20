@@ -1,5 +1,5 @@
-@import "tailwindcss";
-@import "tw-animate-css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -10,9 +10,9 @@
 
 :root {
   /* Basic colors */
-  --primary: #FF5757;
-  --secondary: #FFD700;
-  --accent: #4A90E2;
+  --primary: #ff5757;
+  --secondary: #ffd700;
+  --accent: #4a90e2;
 
   /* HSL values for shadcn/ui */
   --card: 0 0% 12%;
@@ -35,21 +35,21 @@
   --radius: 0.5rem;
 
   /* Jestr specific colors */
-  --jestr-red: #FF5757;
-  --jestr-yellow: #FFD700;
-  --jestr-blue: #4A90E2;
-  --jestr-green: #50E3C2;
-  --jestr-purple: #B15DFF;
+  --jestr-red: #ff5757;
+  --jestr-yellow: #ffd700;
+  --jestr-blue: #4a90e2;
+  --jestr-green: #50e3c2;
+  --jestr-purple: #b15dff;
   --jestr-background: #121212;
-  --jestr-card: #1E1E1E;
-  --jestr-accent: #4A90E2;
+  --jestr-card: #1e1e1e;
+  --jestr-accent: #4a90e2;
   --jestr-border: hsl(0 0% 20%);
   --jestr-input: hsl(0 0% 20%);
   --jestr-ring: hsl(215 74% 59%);
   --jestr-foreground: hsl(0 0% 98%);
   --jestr-muted: hsl(0 0% 20%);
   --jestr-muted-foreground: hsl(0 0% 70%);
-  --jestr-accent-foreground: #FFFFFF;
+  --jestr-accent-foreground: #ffffff;
   --jestr-destructive: hsl(0 85% 60%);
   --jestr-destructive-foreground: hsl(0 0% 98%);
 
@@ -87,56 +87,185 @@
 }
 
 /* Custom classes for jestr colors */
-.text-jestr-red { color: var(--jestr-red); }
-.text-jestr-yellow { color: var(--jestr-yellow); }
-.text-jestr-blue { color: var(--jestr-blue); }
-.text-jestr-green { color: var(--jestr-green); }
-.text-jestr-purple { color: var(--jestr-purple); }
-.text-jestr-accent { color: var(--jestr-accent); }
+.text-jestr-red {
+  color: var(--jestr-red);
+}
+.text-jestr-yellow {
+  color: var(--jestr-yellow);
+}
+.text-jestr-blue {
+  color: var(--jestr-blue);
+}
+.text-jestr-green {
+  color: var(--jestr-green);
+}
+.text-jestr-purple {
+  color: var(--jestr-purple);
+}
+.text-jestr-accent {
+  color: var(--jestr-accent);
+}
 
-.bg-jestr-red { background-color: var(--jestr-red); }
-.bg-jestr-yellow { background-color: var(--jestr-yellow); }
-.bg-jestr-blue { background-color: var(--jestr-blue); }
-.bg-jestr-green { background-color: var(--jestr-green); }
-.bg-jestr-purple { background-color: var(--jestr-purple); }
-.bg-jestr-accent { background-color: var(--jestr-accent); }
-.bg-jestr-background { background-color: var(--jestr-background); }
-.bg-jestr-card { background-color: var(--jestr-card); }
+/* Hover text variants */
+.hover\:text-jestr-red:hover {
+  color: var(--jestr-red);
+}
+.hover\:text-jestr-yellow:hover {
+  color: var(--jestr-yellow);
+}
+.hover\:text-jestr-blue:hover {
+  color: var(--jestr-blue);
+}
+.hover\:text-jestr-green:hover {
+  color: var(--jestr-green);
+}
+.hover\:text-jestr-purple:hover {
+  color: var(--jestr-purple);
+}
+.hover\:text-jestr-accent:hover {
+  color: var(--jestr-accent);
+}
 
-.border-jestr-red { border-color: var(--jestr-red); }
-.border-jestr-yellow { border-color: var(--jestr-yellow); }
-.border-jestr-blue { border-color: var(--jestr-blue); }
-.border-jestr-green { border-color: var(--jestr-green); }
-.border-jestr-purple { border-color: var(--jestr-purple); }
-.border-jestr-accent { border-color: var(--jestr-accent); }
-.border-jestr-border { border-color: var(--jestr-border); }
+.bg-jestr-red {
+  background-color: var(--jestr-red);
+}
+.bg-jestr-yellow {
+  background-color: var(--jestr-yellow);
+}
+.bg-jestr-blue {
+  background-color: var(--jestr-blue);
+}
+.bg-jestr-green {
+  background-color: var(--jestr-green);
+}
+.bg-jestr-purple {
+  background-color: var(--jestr-purple);
+}
+.bg-jestr-purple\/80 {
+  background-color: rgba(177, 93, 255, 0.8);
+}
+.bg-jestr-accent {
+  background-color: var(--jestr-accent);
+}
+.bg-jestr-background {
+  background-color: var(--jestr-background);
+}
+.bg-jestr-background\/80 {
+  background-color: rgba(18, 18, 18, 0.8);
+}
+.bg-jestr-card {
+  background-color: var(--jestr-card);
+}
+
+/* Hover background variants */
+.hover\:bg-jestr-red:hover {
+  background-color: rgba(255, 87, 87, 0.8);
+}
+.hover\:bg-jestr-yellow:hover {
+  background-color: rgba(255, 215, 0, 0.8);
+}
+.hover\:bg-jestr-blue:hover {
+  background-color: rgba(74, 144, 226, 0.8);
+}
+.hover\:bg-jestr-green:hover {
+  background-color: rgba(80, 227, 194, 0.8);
+}
+.hover\:bg-jestr-purple:hover {
+  background-color: rgba(177, 93, 255, 0.8);
+}
+.hover\:bg-jestr-purple\/80:hover {
+  background-color: rgba(177, 93, 255, 0.8);
+}
+.hover\:bg-jestr-accent:hover {
+  background-color: rgba(74, 144, 226, 0.8);
+}
+.hover\:bg-white:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.border-jestr-red {
+  border-color: var(--jestr-red);
+}
+.border-jestr-yellow {
+  border-color: var(--jestr-yellow);
+}
+.border-jestr-blue {
+  border-color: var(--jestr-blue);
+}
+.border-jestr-green {
+  border-color: var(--jestr-green);
+}
+.border-jestr-purple {
+  border-color: var(--jestr-purple);
+}
+.border-jestr-accent {
+  border-color: var(--jestr-accent);
+}
+.border-jestr-border {
+  border-color: var(--jestr-border);
+}
 
 /* Animation classes */
 @keyframes accordion-down {
-  from { height: 0; }
-  to { height: var(--radix-accordion-content-height); }
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
 }
 
 @keyframes accordion-up {
-  from { height: var(--radix-accordion-content-height); }
-  to { height: 0; }
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
 }
 
 @keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
-  20%, 40%, 60%, 80% { transform: translateX(2px); }
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-2px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(2px);
+  }
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
 }
 
-.animate-accordion-down { animation: accordion-down 0.2s ease-out; }
-.animate-accordion-up { animation: accordion-up 0.2s ease-out; }
-.animate-shake { animation: shake 0.5s ease-in-out; }
-.animate-float { animation: float 3s ease-in-out infinite; }
+.animate-accordion-down {
+  animation: accordion-down 0.2s ease-out;
+}
+.animate-accordion-up {
+  animation: accordion-up 0.2s ease-out;
+}
+.animate-shake {
+  animation: shake 0.5s ease-in-out;
+}
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
 
 .dark {
   --background: oklch(0.145 0 0);
@@ -223,7 +352,7 @@
 .pixel-border {
   border-width: 4px;
   border-color: black;
-  box-shadow: 4px 4px 0px 0px rgba(0,0,0,1);
+  box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 1);
 }
 
 .pixel-button {
@@ -234,12 +363,12 @@
   padding-bottom: 0.5rem;
   border-width: 4px;
   border-color: black;
-  box-shadow: 4px 4px 0px 0px rgba(0,0,0,1);
+  box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 1);
   transition-property: all;
   transition-duration: 100ms;
 }
 .pixel-button:active {
-  box-shadow: 2px 2px 0px 0px rgba(0,0,0,1);
+  box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 1);
   transform: translateX(2px) translateY(2px);
 }
 
@@ -249,7 +378,5 @@
   padding: 1rem;
   border-width: 4px;
   border-color: black;
-  box-shadow: 8px 8px 0px 0px rgba(0,0,0,0.5);
+  box-shadow: 8px 8px 0px 0px rgba(0, 0, 0, 0.5);
 }
-
-

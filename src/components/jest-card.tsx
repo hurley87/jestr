@@ -22,6 +22,8 @@ export function JestCard({ jest }: { jest: Token }) {
 
   // const progress = (jest.balance / jest.launchAmount) * 100;
 
+  console.log('jest', jest);
+
   const handleContribute = () => {
     setAnimate(true);
     setTimeout(() => setAnimate(false), 500);
@@ -30,7 +32,7 @@ export function JestCard({ jest }: { jest: Token }) {
   const progress = 50;
 
   return (
-    <Link href={`/jest/${jest.id}`}>
+    <Link href={`/jest/${jest.ownerPublicKey}/${jest.agentId}`}>
       <Card
         className={`gameboy-container overflow-hidden transition-all duration-300 hover:translate-y-[-4px] ${
           animate ? 'animate-shake' : ''
@@ -63,15 +65,15 @@ export function JestCard({ jest }: { jest: Token }) {
             </div>
 
             <div className="flex-1">
-              <h3 className="font-pixel text-sm text-white truncate">
+              <h3 className="font-pixel text-2xl text-white truncate">
                 {jest.metadata.name}
               </h3>
-              <div className="flex items-center">
-                <span className="text-xs text-jestr-yellow font-medium">
+              <div className="flex items-center text-sm">
+                <span className="text-jestr-yellow font-medium">
                   ${jest.metadata.symbol}
                 </span>
-                <span className="mx-1 text-xs text-muted-foreground">by</span>
-                <span className="text-xs text-jestr-blue">USERNAME</span>
+                <span className="mx-1 text-sm text-muted-foreground">by</span>
+                <span className="text-sm text-jestr-blue">USERNAME</span>
               </div>
             </div>
           </div>
@@ -96,7 +98,7 @@ export function JestCard({ jest }: { jest: Token }) {
             </div>
 
             <Button
-              className="bg-jestr-purple hover:bg-jestr-purple/80 font-pixel text-xs py-1 h-7 text-black"
+              className="bg-jestr-purple hover:bg-jestr-purple/80 font-pixel text-2xl py-2 text-black font-bold cursor-pointer"
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();

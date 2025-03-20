@@ -12,7 +12,7 @@ export function Connect() {
     return (
       <Button
         size="lg"
-        className="bg-jestr-purple hover:bg-jestr-purple/80 text-white font-pixel text-xs py-1 h-auto"
+        className="bg-jestr-purple hover:bg-jestr-purple/80 text-white font-pixel text-xl py-1 h-auto"
       >
         Connected
       </Button>
@@ -23,7 +23,7 @@ export function Connect() {
     <Button
       onClick={login}
       size="lg"
-      className="bg-jestr-purple hover:bg-jestr-purple/80 text-white font-pixel text-xs py-1 h-auto"
+      className="bg-jestr-purple hover:bg-jestr-purple/80 text-white font-pixel text-xl py-1 h-auto cursor-pointer"
     >
       Connect
     </Button>

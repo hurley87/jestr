@@ -21,7 +21,7 @@ export default async function Home() {
         {/* Launched Tokens Section */}
         <section className="mb-8">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="font-pixel text-xl text-white">Top Tokens</h2>
+            <h2 className="font-pixel text-5xl text-white">Top Tokens</h2>
             <Link href="/tokens">
               <Button
                 variant="outline"
@@ -43,15 +43,9 @@ export default async function Home() {
 
         {/* Active Pre-sales Section */}
         <section>
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="font-pixel text-xl text-white">Active Pre-sales</h2>
-            <Button
-              variant="outline"
-              className="text-jestr-purple bg-black border-jestr-purple group"
-            >
-              <span className="group-hover:text-white">Create Pre-sale</span>
-            </Button>
-          </div>
+          <h2 className="font-pixel text-5xl text-white mb-4">
+            Active Pre-sales
+          </h2>
 
           <div className="space-y-3">
             {activeJests.map((jest) => (

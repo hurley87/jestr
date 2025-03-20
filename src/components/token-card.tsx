@@ -18,23 +18,23 @@ export function TokenCard({ token }: { token: Token }) {
             fill
             className="object-cover"
           />
-          <div className="absolute top-2 right-2 bg-jestr-background/80 backdrop-blur-sm rounded-full px-2 py-1">
-            <span className="text-xs font-pixel text-jestr-yellow">
-              {token.metadata.symbol}
+          <div className="absolute top-2 right-2 bg-jestr-background/80 backdrop-blur-sm rounded-full px-2 py-1 font-pixel ">
+            <span className="text-3xl font-pixel text-jestr-yellow font-bold">
+              ${token.metadata.symbol}
             </span>
           </div>
         </div>
 
         <div className="p-4 space-y-4">
           <div>
-            <h3 className="font-pixel text-sm text-white truncate">
+            <h3 className="font-pixel text-3xl text-white truncate">
               {token.metadata.name}
             </h3>
             <div className="flex items-center mt-1">
               <span className="text-xs text-muted-foreground">by </span>
               <Link
                 href={`#`}
-                className="text-xs text-jestr-blue hover:underline ml-1"
+                className="text-sm text-jestr-blue hover:underline ml-1"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -78,9 +78,9 @@ export function TokenCard({ token }: { token: Token }) {
               </p>
             </div> */}
 
-            <Button className="w-full bg-jestr-blue hover:bg-jestr-blue/80 font-pixel text-xl py-1 h-8 text-black">
+            <Button className="w-full bg-jestr-blue hover:bg-jestr-blue/80 font-pixel text-2xl py-2 text-black font-bold">
               Buy
-              <ArrowUpRight className="ml-1 h-3 w-3" />
+              <ArrowUpRight className="h-6 font-bold w-6" />
             </Button>
           </div>
         </div>
