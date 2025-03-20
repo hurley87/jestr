@@ -7,7 +7,7 @@ import { JestTimer } from '@/components/jest-timer';
 import Image from 'next/image';
 import Link from 'next/link';
 import { formatSOL } from '@/lib/utils';
-import { ArrowLeft, Share2, ExternalLink } from 'lucide-react';
+import { ArrowLeft, ExternalLink } from 'lucide-react';
 import { Token } from '@/types';
 
 interface Contributor {
@@ -76,155 +76,165 @@ export default async function JestDetail({ params }: JestDetailProps) {
 
   const progress = (Number(token?.balance || 0) / 10) * 100;
 
+  // Get current page URL for sharing
+  const pageUrl = `https://jestr.vercel.app/jest/${key}/${id}`;
+  const twitterShareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(
+    pageUrl
+  )}&text=${encodeURIComponent(
+    `Check out ${token?.metadata.name || 'this Jest token'} presale!`
+  )}`;
+
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col bg-jestr-background">
       <Header />
 
-      <main className="flex-1 container py-4 sm:py-6 md:py-8 px-4 sm:px-6 mx-auto">
+      <main className="flex-1 container max-w-4xl py-6 md:py-8 px-4 md:px-6 mx-auto">
         <Link
           href="/"
-          className="inline-flex items-center text-muted-foreground hover:text-white mb-4 sm:mb-6"
+          className="inline-flex items-center text-muted-foreground hover:text-white mb-6 text-sm"
         >
-          <ArrowLeft className="mr-2 h-4 w-4" />
+          <ArrowLeft className="mr-2 h-5 w-5" />
           <span>Back to Home</span>
         </Link>
 
-        <Card className={`gameboy-container overflow-hidden`}>
-          <CardContent className="p-4 sm:p-6 space-y-4 sm:space-y-6">
-            <div className="flex flex-col md:flex-row gap-4 md:gap-6">
-              <div className="relative h-32 w-32 sm:h-40 sm:w-40 mx-auto md:mx-0 rounded-lg overflow-hidden border-4 border-black">
+        <Card className="gameboy-container overflow-hidden shadow-lg">
+          <CardContent className="p-6 md:p-8 space-y-6 md:space-y-8">
+            {/* Token Header Section */}
+            <div className="flex flex-col md:flex-row gap-6 md:gap-8">
+              {/* Token Image - Larger and more prominent */}
+              <div className="relative h-48 w-48 mx-auto md:mx-0 rounded-xl overflow-hidden border-4 border-black shadow-md">
                 <Image
                   src={token?.metadata.image || '/placeholder.svg'}
                   alt={token?.metadata.name || ''}
                   fill
                   className="object-cover"
+                  priority
                 />
               </div>
 
-              <div className="flex-1 space-y-3 sm:space-y-4">
+              {/* Token Details */}
+              <div className="flex-1 space-y-4 md:space-y-5">
+                {/* Token Name and Symbol */}
                 <div className="text-center md:text-left">
-                  <h1 className="font-pixel text-2xl sm:text-3xl text-white">
+                  <h1 className="font-pixel text-3xl md:text-4xl text-white mb-2">
                     {token?.metadata.name}
                   </h1>
                   <div className="flex flex-wrap items-center mt-2 justify-center md:justify-start">
-                    <span className="text-sm text-jestr-yellow font-medium">
+                    <span className="text-base text-jestr-yellow font-medium">
                       ${token?.metadata.symbol}
                     </span>
-                    <span className="mx-2 text-sm text-muted-foreground">
+                    <span className="mx-2 text-base text-muted-foreground">
                       by
                     </span>
                     <Link
                       href={`#`}
-                      className="text-sm text-jestr-blue hover:underline"
+                      className="text-base text-jestr-blue hover:underline"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
                       USERNAME
                     </Link>
-                    <span className="ml-2 text-sm text-muted-foreground">
+                    <span className="ml-2 text-base text-muted-foreground">
                       on X
                     </span>
                   </div>
+
+                  {/* Status Badge - More prominent */}
+                  {token && (
+                    <div className="mt-3">
+                      <span
+                        className={`inline-flex px-3 py-1.5 text-sm font-bold rounded-md ${
+                          token.isPresaleActive && !token.isGraduated
+                            ? 'bg-green-600/30 text-green-400'
+                            : !token.isPresaleActive && token.isGraduated
+                            ? 'bg-blue-600/30 text-blue-400'
+                            : 'bg-red-600/30 text-red-400'
+                        }`}
+                      >
+                        {token.isPresaleActive && !token.isGraduated
+                          ? 'ACTIVE'
+                          : !token.isPresaleActive && token.isGraduated
+                          ? 'GRADUATED'
+                          : 'FAILED'}
+                      </span>
+                    </div>
+                  )}
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4">
-                  <div className="bg-jestr-background/50 rounded-lg p-3 flex-1">
-                    <p className="text-xs text-muted-foreground">
+                {/* Info Cards - Simplified to 2 columns */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="bg-jestr-background/70 rounded-lg p-4 flex-1 shadow-sm">
+                    <p className="text-sm text-muted-foreground mb-1">
                       Time Remaining
                     </p>
                     {token?.agentId && <JestTimer agentId={token.agentId} />}
                   </div>
 
-                  <div className="bg-jestr-background/50 rounded-lg p-3 flex-1">
-                    <p className="text-xs text-muted-foreground">
+                  <div className="bg-jestr-background/70 rounded-lg p-4 flex-1 shadow-sm">
+                    <p className="text-sm text-muted-foreground mb-1">
                       Total Raised
                     </p>
-                    <p className="font-pixel text-white text-lg">
+                    <p className="font-pixel text-white text-xl">
                       {formatSOL(Number(token?.balance || 0))}
                     </p>
                   </div>
                 </div>
 
-                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-                  <div className="flex justify-center gap-3 sm:gap-4">
+                {/* Share Button */}
+                <div className="flex justify-center md:justify-start mt-2">
+                  <Link
+                    href={twitterShareUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <Button
                       variant="outline"
-                      size="icon"
-                      className="border-jestr-blue text-jestr-blue hover:bg-jestr-blue/10"
+                      className="border-jestr-blue text-jestr-blue hover:bg-jestr-blue/10 cursor-pointer flex items-center gap-2 px-4 py-2 h-auto"
                     >
-                      <Share2 className="h-5 w-5 sm:h-6 sm:w-6" />
-                      <span className="sr-only">Share</span>
+                      <ExternalLink className="h-4 w-4" />
+                      <span>Share on Twitter</span>
                     </Button>
-
-                    <Link href={'#'} target="_blank" rel="noopener noreferrer">
-                      <Button
-                        variant="outline"
-                        size="icon"
-                        className="border-jestr-blue text-jestr-blue hover:bg-jestr-blue/10"
-                      >
-                        <ExternalLink className="h-4 w-4" />
-                        <span className="sr-only">View Original Post</span>
-                      </Button>
-                    </Link>
-                  </div>
+                  </Link>
                 </div>
               </div>
             </div>
 
-            <div className="space-y-2 sm:space-y-3">
-              <div className="flex justify-between text-xs sm:text-sm">
-                <span className="text-muted-foreground">Progress</span>
-                <span className="font-pixel text-jestr-green">
+            {/* Progress Section - More prominent */}
+            <div className="bg-jestr-background/50 rounded-xl p-5 space-y-3 shadow-sm">
+              <div className="flex justify-between text-sm">
+                <span className="text-muted-foreground font-medium">
+                  Progress
+                </span>
+                <span className="font-pixel text-jestr-green text-lg">
                   {progress.toFixed(0)}%
                 </span>
               </div>
               <Progress
                 value={progress}
-                className="h-4 sm:h-6 bg-jestr-background border-2 border-black"
+                className="h-8 bg-jestr-background/80 border-2 border-black"
                 indicatorClassName="bg-jestr-green"
               />
 
-              <div className="flex justify-between text-xs sm:text-sm">
+              <div className="flex justify-between text-sm pt-1">
                 <div>
                   <span className="text-muted-foreground">Raised: </span>
-                  <span className="font-medium">
+                  <span className="font-bold text-white">
                     {formatSOL(Number(token?.balance || 0))}
                   </span>
                 </div>
                 <div>
                   <span className="text-muted-foreground">Goal: </span>
-                  <span className="font-medium">{formatSOL(10)}</span>
+                  <span className="font-bold text-white">{formatSOL(10)}</span>
                 </div>
               </div>
             </div>
 
-            {/* <div>
-              <h3 className="font-pixel text-sm text-white mb-3">
-                Contributors
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                {contributors.map((contributor: Contributor, index: number) => (
-                  <div
-                    key={index}
-                    className="relative h-8 w-8 rounded-full border-2 border-jestr-card overflow-hidden"
-                    title={contributor.username}
-                  >
-                    <Image
-                      src={contributor.avatar || '/placeholder.svg'}
-                      alt={contributor.username}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                ))}
-              </div>
-            </div> */}
-
-            <div className="bg-jestr-background/50 rounded-lg p-3 sm:p-4">
-              <h3 className="font-pixel text-sm text-white mb-2">
+            {/* About Section */}
+            <div className="bg-jestr-background/50 rounded-xl p-5 shadow-sm">
+              <h3 className="font-pixel text-base text-white mb-3">
                 About This Pre-sale
               </h3>
-              <p className="text-xs sm:text-sm text-muted-foreground">
+              <p className="text-sm text-muted-foreground leading-relaxed">
                 This is a pre-sale for {token?.metadata.name} (
                 {token?.metadata.symbol}). The goal is to raise {formatSOL(10)}{' '}
                 within the time limit. If the goal is reached, the token will be
