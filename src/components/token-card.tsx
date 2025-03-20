@@ -19,17 +19,19 @@ export async function TokenCard({ token }: { token: Token }) {
             alt={token.metadata.name}
             fill
             className="object-cover"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+            priority
           />
-          <div className="absolute top-2 right-2 bg-jestr-background/80 backdrop-blur-sm rounded-full px-2 py-1 font-pixel ">
-            <span className="text-3xl font-pixel text-jestr-yellow font-bold">
+          <div className="absolute top-2 right-2 bg-jestr-background/80 backdrop-blur-sm rounded-full px-2 py-1 font-pixel">
+            <span className="text-xl sm:text-2xl md:text-3xl font-pixel text-jestr-yellow font-bold">
               ${token.metadata.symbol}
             </span>
           </div>
         </div>
 
-        <div className="p-4 space-y-4">
+        <div className="p-3 sm:p-4 space-y-3 sm:space-y-4">
           <div>
-            <h3 className="font-pixel text-3xl text-white truncate">
+            <h3 className="font-pixel text-xl sm:text-2xl md:text-3xl text-white truncate">
               {token.metadata.name}
             </h3>
             <div className="flex items-center mt-1">
@@ -84,9 +86,9 @@ export async function TokenCard({ token }: { token: Token }) {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Button className="w-full bg-jestr-blue hover:bg-jestr-blue/80 font-pixel text-2xl py-2 text-black font-bold">
+              <Button className="w-full bg-jestr-blue hover:bg-jestr-blue/80 font-pixel text-lg sm:text-xl md:text-2xl py-1 sm:py-2 text-black font-bold cursor-pointer">
                 Buy
-                <ArrowUpRight className="h-6 font-bold w-6" />
+                <ArrowUpRight className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 font-bold" />
               </Button>
             </Link>
           </div>

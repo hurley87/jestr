@@ -11,8 +11,8 @@ export function Connect() {
   if (user) {
     return (
       <Button
-        size="lg"
-        className="bg-jestr-purple hover:bg-jestr-purple/80 text-white font-pixel text-xl py-1 h-auto"
+        size="sm"
+        className="bg-jestr-purple hover:bg-jestr-purple/80 text-white font-pixel text-sm sm:text-base md:text-xl py-1 px-2 sm:px-3 md:px-4 h-auto"
       >
         Connected
       </Button>
@@ -22,8 +22,8 @@ export function Connect() {
   return (
     <Button
       onClick={login}
-      size="lg"
-      className="bg-jestr-purple hover:bg-jestr-purple/80 text-white font-pixel text-xl py-1 h-auto cursor-pointer"
+      size="sm"
+      className="bg-jestr-purple hover:bg-jestr-purple/80 text-white font-pixel text-sm sm:text-base md:text-xl py-1 px-2 sm:px-3 md:px-4 h-auto cursor-pointer"
     >
       Connect
     </Button>

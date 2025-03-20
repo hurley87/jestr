@@ -17,11 +17,13 @@ export default async function Home() {
     <div className="flex min-h-screen flex-col">
       <Header />
 
-      <main className="flex-1 container py-6 mx-auto">
+      <main className="flex-1 container px-4 py-6 mx-auto">
         {/* Launched Tokens Section */}
-        <section className="mb-8">
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="font-pixel text-5xl text-white">Top Tokens</h2>
+        <section className="mb-8 md:mb-12">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4 sm:mb-6">
+            <h2 className="font-pixel text-3xl sm:text-4xl md:text-5xl text-white">
+              Top Tokens
+            </h2>
             <Link href="/tokens">
               <Button
                 variant="outline"
@@ -34,7 +36,7 @@ export default async function Home() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
             {launchedTokens.map((token) => (
               <TokenCard key={token.id} token={token} />
             ))}
@@ -43,11 +45,11 @@ export default async function Home() {
 
         {/* Active Pre-sales Section */}
         <section>
-          <h2 className="font-pixel text-5xl text-white mb-4">
+          <h2 className="font-pixel text-3xl sm:text-4xl md:text-5xl text-white mb-4 sm:mb-6">
             Active Pre-sales
           </h2>
 
-          <div className="space-y-3">
+          <div className="space-y-3 md:space-y-4">
             {activeJests.map((jest) => (
               <JestCard key={jest.id} jest={jest} />
             ))}
