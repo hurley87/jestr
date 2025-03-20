@@ -23,9 +23,7 @@ interface JestDetailProps {
   }>;
 }
 
-export const getContributors = async (
-  tokenId: string
-): Promise<Contributor[]> => {
+const getContributors = async (tokenId: string): Promise<Contributor[]> => {
   try {
     const url = `${process.env.CIRCUS_API_URL}/solana/agent/presale/get-contributions?agent_id=${tokenId}`;
     const response = await fetch(url, {
@@ -46,7 +44,7 @@ export const getContributors = async (
   }
 };
 
-async function getToken(key: string, id: string): Promise<Token | null> {
+const getToken = async (key: string, id: string): Promise<Token | null> => {
   const url = `${process.env.CIRCUS_API_URL}/solana/agent/get?agent_id=${key}&owner_public_key=${id}`;
   try {
     const response = await fetch(url, {
@@ -65,7 +63,7 @@ async function getToken(key: string, id: string): Promise<Token | null> {
     console.error('Error fetching token:', error);
     return null;
   }
-}
+};
 
 export default async function JestDetail({ params }: JestDetailProps) {
   const { key, id } = await params;
