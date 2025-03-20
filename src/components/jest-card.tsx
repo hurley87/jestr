@@ -18,7 +18,7 @@ export async function JestCard({ jest }: { jest: Token }) {
       >
         <CardContent className="p-2 sm:p-3 space-y-2 sm:space-y-3">
           <div className="space-y-1">
-            <div className="flex justify-between text-xs">
+            <div className="flex justify-between text-lg">
               <span className="text-muted-foreground">Progress</span>
               <span className="font-pixel text-jestr-green">
                 {progress.toFixed(0)}%
@@ -30,7 +30,7 @@ export async function JestCard({ jest }: { jest: Token }) {
             />
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 text-lg">
             <div className="relative h-8 w-8 sm:h-10 sm:w-10 rounded-full overflow-hidden border-2 border-black">
               <Image
                 src={
@@ -57,7 +57,7 @@ export async function JestCard({ jest }: { jest: Token }) {
             </div>
           </div>
 
-          <div className="flex justify-between text-xs">
+          <div className="flex justify-between text-md">
             <div>
               <span className="text-muted-foreground">Raised: </span>
               <span className="font-medium">{jest.balance} SOL</span>
@@ -70,7 +70,7 @@ export async function JestCard({ jest }: { jest: Token }) {
 
           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 sm:gap-0">
             <div>
-              <span className="text-muted-foreground text-xs">Time left: </span>
+              <span className="text-muted-foreground text-md">Time left: </span>
               <span
                 className={`font-pixel text-lg ${
                   expiration.error ? 'text-red-500' : 'text-jestr-yellow'
@@ -79,10 +79,6 @@ export async function JestCard({ jest }: { jest: Token }) {
                 {expiration.timeRemaining}
               </span>
             </div>
-
-            <Button className="w-full sm:w-auto bg-jestr-purple hover:bg-jestr-purple/80 font-pixel text-lg sm:text-xl md:text-2xl py-1 sm:py-2 text-black font-bold cursor-pointer">
-              Contribute {jest.balance} SOL
-            </Button>
           </div>
         </CardContent>
       </Card>
