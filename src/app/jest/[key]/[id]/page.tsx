@@ -236,7 +236,7 @@ export default async function JestDetail({ params }: JestDetailProps) {
               </h3>
               <p className="text-xs sm:text-sm text-muted-foreground">
                 This is a pre-sale for {token?.metadata.name} (
-                {token?.metadata.symbol}). The goal is to raise {formatSOL(100)}{' '}
+                {token?.metadata.symbol}). The goal is to raise {formatSOL(10)}{' '}
                 within the time limit. If the goal is reached, the token will be
                 launched and distributed to contributors proportionally to their
                 contribution. If the goal is not reached, all contributions will

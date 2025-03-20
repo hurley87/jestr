@@ -29,7 +29,7 @@ export function JestCard({ jest }: { jest: Token }) {
     setTimeout(() => setAnimate(false), 500);
   };
 
-  const progress = 50;
+  const progress = (Number(jest.balance) / 10) * 100;
 
   return (
     <Link href={`/jest/${jest.ownerPublicKey}/${jest.agentId}`}>
@@ -86,7 +86,7 @@ export function JestCard({ jest }: { jest: Token }) {
             </div>
             <div>
               <span className="text-muted-foreground">Goal: </span>
-              <span className="font-medium">{jest.balance} SOL</span>
+              <span className="font-medium">10 SOL</span>
             </div>
           </div>
 
