@@ -4,8 +4,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import { Token } from '@/types';
+import { getPublicKey } from '@/lib/utils';
 
-export function TokenCard({ token }: { token: Token }) {
+export async function TokenCard({ token }: { token: Token }) {
+  const publicKey = await getPublicKey(token.id);
   return (
     <Card className="gameboy-container overflow-hidden transition-all duration-300 hover:translate-y-[-4px]">
       <CardContent className="p-0">
@@ -77,11 +79,16 @@ export function TokenCard({ token }: { token: Token }) {
                 ${marketcap.toLocaleString()}
               </p>
             </div> */}
-
-            <Button className="w-full bg-jestr-blue hover:bg-jestr-blue/80 font-pixel text-2xl py-2 text-black font-bold">
-              Buy
-              <ArrowUpRight className="h-6 font-bold w-6" />
-            </Button>
+            <Link
+              href={`https://dexscreener.com/solana/${publicKey}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button className="w-full bg-jestr-blue hover:bg-jestr-blue/80 font-pixel text-2xl py-2 text-black font-bold">
+                Buy
+                <ArrowUpRight className="h-6 font-bold w-6" />
+              </Button>
+            </Link>
           </div>
         </div>
       </CardContent>
