@@ -1,34 +1,47 @@
-"use client"
+'use client';
 
-import { useState, useEffect } from "react"
-import { formatTimeRemaining } from "@/lib/utils"
+import { useEffect, useState } from 'react';
+import { checkPresaleExpiration } from '@/lib/utils';
 
 interface JestTimerProps {
-  endTime: Date
-  className?: string
-  initialTimeRemaining?: string
+  agentId: string;
 }
 
-export function JestTimer({ 
-  endTime, 
-  className = "",
-  initialTimeRemaining
-}: JestTimerProps) {
-  const [timeRemaining, setTimeRemaining] = useState<string>(
-    initialTimeRemaining || formatTimeRemaining(endTime)
-  )
+export function JestTimer({ agentId }: JestTimerProps) {
+  const [timeRemaining, setTimeRemaining] = useState<string>('Loading...');
+  const [isExpired, setIsExpired] = useState<boolean>(false);
+  const [error, setError] = useState<string | undefined>(undefined);
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeRemaining(formatTimeRemaining(endTime))
-    }, 1000)
+    const fetchExpiration = async () => {
+      try {
+        const expiration = await checkPresaleExpiration(agentId);
+        setTimeRemaining(expiration.timeRemaining);
+        setIsExpired(expiration.hasExpired);
+        setError(expiration.error);
+      } catch (err) {
+        setError('Failed to fetch expiration time');
+        console.error(err);
+      }
+    };
 
-    return () => clearInterval(timer)
-  }, [endTime])
+    fetchExpiration();
+
+    // Update every minute if not expired
+    const intervalId = setInterval(() => {
+      fetchExpiration();
+    }, 60000);
+
+    return () => clearInterval(intervalId);
+  }, [agentId]);
 
   return (
-    <p className={`font-pixel text-jestr-yellow text-lg ${className}`}>
+    <span
+      className={`font-pixel text-lg ${
+        error || isExpired ? 'text-red-500' : 'text-jestr-yellow'
+      }`}
+    >
       {timeRemaining}
-    </p>
-  )
-} 
+    </span>
+  );
+}

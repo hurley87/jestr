@@ -3,6 +3,7 @@ import { Footer } from '@/components/footer';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Card, CardContent } from '@/components/ui/card';
+import { JestTimer } from '@/components/jest-timer';
 import Image from 'next/image';
 import Link from 'next/link';
 import { formatSOL } from '@/lib/utils';
@@ -73,7 +74,7 @@ export default async function JestDetail({ params }: JestDetailProps) {
   console.log('token', token);
   console.log('contributors', contributors);
 
-  const progress = 50;
+  const progress = (Number(token?.balance || 0) / 10) * 100;
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -131,16 +132,7 @@ export default async function JestDetail({ params }: JestDetailProps) {
                     <p className="text-xs text-muted-foreground">
                       Time Remaining
                     </p>
-                    {/* <JestTimer endTime={token?.endTime} /> */}
-                  </div>
-
-                  <div className="bg-jestr-background/50 rounded-lg p-3 flex-1">
-                    <p className="text-xs text-muted-foreground">
-                      Your Contribution
-                    </p>
-                    <p className="font-pixel text-jestr-green text-lg">
-                      {formatSOL(100)}
-                    </p>
+                    {token?.agentId && <JestTimer agentId={token.agentId} />}
                   </div>
 
                   <div className="bg-jestr-background/50 rounded-lg p-3 flex-1">
@@ -148,16 +140,12 @@ export default async function JestDetail({ params }: JestDetailProps) {
                       Total Raised
                     </p>
                     <p className="font-pixel text-white text-lg">
-                      {formatSOL(100)}
+                      {formatSOL(Number(token?.balance || 0))}
                     </p>
                   </div>
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-                  <Button className="w-full sm:flex-1 bg-jestr-purple hover:bg-jestr-purple/80 font-pixel text-xl sm:text-2xl font-bold text-black py-2 cursor-pointer">
-                    Contribute {formatSOL(100)}
-                  </Button>
-
                   <div className="flex justify-center gap-3 sm:gap-4">
                     <Button
                       variant="outline"
@@ -199,11 +187,13 @@ export default async function JestDetail({ params }: JestDetailProps) {
               <div className="flex justify-between text-xs sm:text-sm">
                 <div>
                   <span className="text-muted-foreground">Raised: </span>
-                  <span className="font-medium">{formatSOL(100)}</span>
+                  <span className="font-medium">
+                    {formatSOL(Number(token?.balance || 0))}
+                  </span>
                 </div>
                 <div>
                   <span className="text-muted-foreground">Goal: </span>
-                  <span className="font-medium">{formatSOL(100)}</span>
+                  <span className="font-medium">{formatSOL(10)}</span>
                 </div>
               </div>
             </div>
