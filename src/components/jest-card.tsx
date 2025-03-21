@@ -28,8 +28,18 @@ export async function JestCard({ jest }: { jest: Token }) {
               className="h-2 sm:h-3 bg-jestr-background border border-black [&>[data-slot=progress-indicator]]:bg-jestr-green"
             />
           </div>
+          <div className="flex justify-between text-md">
+            <div>
+              <span className="text-muted-foreground">Raised: </span>
+              <span className="font-medium">{jest.balance} SOL</span>
+            </div>
+            <div>
+              <span className="text-muted-foreground">Goal: </span>
+              <span className="font-medium">10 SOL</span>
+            </div>
+          </div>
 
-          <div className="flex items-center gap-2 text-lg">
+          <div className="flex items-center gap-2 text-lg py-4">
             <div className="relative h-8 w-8 sm:h-10 sm:w-10 rounded-full overflow-hidden border-2 border-black">
               <Image
                 src={
@@ -50,27 +60,7 @@ export async function JestCard({ jest }: { jest: Token }) {
                 <span className="text-jestr-yellow font-medium truncate">
                   ${jest.metadata.symbol}
                 </span>
-                <span className="mx-1 text-muted-foreground">by</span>
-                <Link
-                  href={`https://x.com/${jest.ownerTwitterId}/status/${jest.creationTweetId}`}
-                  className="text-jestr-blue hover:underline"
-                >
-                  <span className="text-jestr-blue truncate">
-                    {jest.ownerTwitterId}
-                  </span>
-                </Link>
               </div>
-            </div>
-          </div>
-
-          <div className="flex justify-between text-md">
-            <div>
-              <span className="text-muted-foreground">Raised: </span>
-              <span className="font-medium">{jest.balance} SOL</span>
-            </div>
-            <div>
-              <span className="text-muted-foreground">Goal: </span>
-              <span className="font-medium">10 SOL</span>
             </div>
           </div>
 
