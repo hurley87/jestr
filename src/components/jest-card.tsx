@@ -6,6 +6,7 @@ import { Token } from '@/types';
 import { checkPresaleExpiration } from '@/lib/utils';
 
 export async function JestCard({ jest }: { jest: Token }) {
+  console.log(jest);
   const expiration = await checkPresaleExpiration(jest.agentId);
 
   const progress = (Number(jest.balance) / 10) * 100;

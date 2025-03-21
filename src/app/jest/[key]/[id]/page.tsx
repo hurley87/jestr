@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Card, CardContent } from '@/components/ui/card';
 import { JestTimer } from '@/components/jest-timer';
+import { StatusBadge } from '@/components/status-badge';
 import Image from 'next/image';
 import Link from 'next/link';
 import { formatSOL } from '@/lib/utils';
@@ -152,21 +153,10 @@ export default async function JestDetail({ params }: JestDetailProps) {
 
                   {/* Status Badge */}
                   {token && (
-                    <span
-                      className={`inline-flex px-3 py-1.5 text-sm font-bold rounded-md self-center ${
-                        token.isPresaleActive && !token.isGraduated
-                          ? 'bg-green-600/30 text-green-400'
-                          : !token.isPresaleActive && token.isGraduated
-                          ? 'bg-blue-600/30 text-blue-400'
-                          : 'bg-red-600/30 text-red-400'
-                      }`}
-                    >
-                      {token.isPresaleActive && !token.isGraduated
-                        ? 'ACTIVE'
-                        : !token.isPresaleActive && token.isGraduated
-                        ? 'GRADUATED'
-                        : 'FAILED'}
-                    </span>
+                    <StatusBadge
+                      isPresaleActive={token.isPresaleActive}
+                      isGraduated={token.isGraduated}
+                    />
                   )}
                 </div>
 
