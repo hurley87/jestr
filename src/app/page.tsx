@@ -11,7 +11,8 @@ export default async function Home() {
   const launchedTokens = tokens
     .filter((token) => token.isGraduated === true)
     .slice(0, 4);
-  const activeJests = tokens.filter((token) => token.isPresaleActive === true);
+  // const activeJests = tokens.filter((token) => token.isPresaleActive === true);
+  const activeJests = tokens;
 
   return (
     <div className="flex min-h-screen flex-col">
