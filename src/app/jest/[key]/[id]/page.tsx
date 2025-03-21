@@ -249,7 +249,7 @@ export default async function JestDetail({ params }: JestDetailProps) {
                   <Link href="#" className="text-jestr-blue hover:underline">
                     link
                   </Link>
-                  ) with the word "contribute"
+                  ) {`with the word "contribute"`}
                 </li>
               </ul>
               <p className="text-sm text-muted-foreground mt-2">
