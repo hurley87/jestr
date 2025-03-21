@@ -70,12 +70,16 @@ export const checkPresaleExpiration = async (
 
   const url = `${process.env.CIRCUS_API_URL}/solana/agent/presale/check-expiration?agent_id=${agentId}`;
 
+  console.log('url', url);
+
   try {
     const response = await fetch(url, {
       headers: {
         'x-api-key': `${process.env.CIRCUS_API_KEY}`,
       },
     });
+
+    console.log('response', response);
 
     if (!response.ok) {
       const errorMessage = `Failed to check presale expiration: ${response.statusText}`;

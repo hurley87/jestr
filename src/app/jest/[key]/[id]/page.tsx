@@ -138,100 +138,92 @@ export default async function JestDetail({ params }: JestDetailProps) {
                       on X
                     </span>
                   </div>
-
-                  {/* Status Badge - More prominent */}
-                  {token && (
-                    <div className="mt-3">
-                      <span
-                        className={`inline-flex px-3 py-1.5 text-sm font-bold rounded-md ${
-                          token.isPresaleActive && !token.isGraduated
-                            ? 'bg-green-600/30 text-green-400'
-                            : !token.isPresaleActive && token.isGraduated
-                            ? 'bg-blue-600/30 text-blue-400'
-                            : 'bg-red-600/30 text-red-400'
-                        }`}
-                      >
-                        {token.isPresaleActive && !token.isGraduated
-                          ? 'ACTIVE'
-                          : !token.isPresaleActive && token.isGraduated
-                          ? 'GRADUATED'
-                          : 'FAILED'}
-                      </span>
-                    </div>
-                  )}
                 </div>
 
-                {/* Info Cards - Simplified to 2 columns */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="bg-jestr-background/70 rounded-lg p-4 flex-1 shadow-sm">
-                    <p className="text-sm text-muted-foreground mb-1">
+                {/* Status Badge and Time Remaining - Side by side */}
+                <div className="mt-3 flex flex-wrap items-center justify-center md:justify-start gap-3">
+                  {/* Time Remaining */}
+                  <div className="bg-jestr-background/70 rounded-lg p-2 flex-shrink-0 shadow-sm">
+                    <p className="text-xs text-muted-foreground mb-1">
                       Time Remaining
                     </p>
                     {token?.agentId && <JestTimer agentId={token.agentId} />}
                   </div>
 
-                  <div className="bg-jestr-background/70 rounded-lg p-4 flex-1 shadow-sm">
-                    <p className="text-sm text-muted-foreground mb-1">
-                      Total Raised
-                    </p>
-                    <p className="font-pixel text-white text-xl">
-                      {formatSOL(Number(token?.balance || 0))}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Share Button */}
-                <div className="flex justify-center md:justify-start mt-2">
-                  <Link
-                    href={twitterShareUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Button
-                      variant="outline"
-                      className="border-jestr-blue text-jestr-blue hover:bg-jestr-blue/10 cursor-pointer flex items-center gap-2 px-4 py-2 h-auto"
+                  {/* Status Badge */}
+                  {token && (
+                    <span
+                      className={`inline-flex px-3 py-1.5 text-sm font-bold rounded-md self-center ${
+                        token.isPresaleActive && !token.isGraduated
+                          ? 'bg-green-600/30 text-green-400'
+                          : !token.isPresaleActive && token.isGraduated
+                          ? 'bg-blue-600/30 text-blue-400'
+                          : 'bg-red-600/30 text-red-400'
+                      }`}
                     >
-                      <ExternalLink className="h-4 w-4" />
-                      <span>Share on Twitter</span>
-                    </Button>
-                  </Link>
+                      {token.isPresaleActive && !token.isGraduated
+                        ? 'ACTIVE'
+                        : !token.isPresaleActive && token.isGraduated
+                        ? 'GRADUATED'
+                        : 'FAILED'}
+                    </span>
+                  )}
                 </div>
-              </div>
-            </div>
 
-            {/* Progress Section - More prominent */}
-            <div className="bg-jestr-background/50 rounded-xl p-5 space-y-3 shadow-sm">
-              <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground font-medium">
-                  Progress
-                </span>
-                <span className="font-pixel text-jestr-green text-lg">
-                  {progress.toFixed(0)}%
-                </span>
-              </div>
-              <Progress
-                value={progress}
-                className="h-8 bg-jestr-background/80 border-2 border-black"
-                indicatorClassName="bg-jestr-green"
-              />
+                {/* Progress Section - Moved under status */}
+                <div className="mt-4 bg-jestr-background/50 rounded-xl p-4 space-y-3 shadow-sm">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground font-medium">
+                      Progress
+                    </span>
+                    <span className="font-pixel text-jestr-green text-lg">
+                      {progress.toFixed(0)}%
+                    </span>
+                  </div>
+                  <Progress
+                    value={progress}
+                    className="h-8 bg-jestr-background/80 border-2 border-black"
+                    indicatorClassName="bg-jestr-green"
+                  />
 
-              <div className="flex justify-between text-sm pt-1">
-                <div>
-                  <span className="text-muted-foreground">Raised: </span>
-                  <span className="font-bold text-white">
-                    {formatSOL(Number(token?.balance || 0))}
-                  </span>
-                </div>
-                <div>
-                  <span className="text-muted-foreground">Goal: </span>
-                  <span className="font-bold text-white">{formatSOL(10)}</span>
+                  <div className="flex justify-between text-sm pt-1">
+                    <div>
+                      <span className="text-muted-foreground">Raised: </span>
+                      <span className="font-bold text-white">
+                        {formatSOL(Number(token?.balance || 0))}
+                      </span>
+                    </div>
+                    <div>
+                      <span className="text-muted-foreground">Goal: </span>
+                      <span className="font-bold text-white">
+                        {formatSOL(10)}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Share Button */}
+                  <div className="flex justify-end mt-6">
+                    <Link
+                      href={twitterShareUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Button
+                        variant="outline"
+                        className="border-jestr-blue text-jestr-blue hover:bg-jestr-blue/10 cursor-pointer flex items-center gap-2 px-4 py-2 h-auto"
+                      >
+                        <ExternalLink className="h-4 w-4" />
+                        <span>Share on Twitter</span>
+                      </Button>
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>
 
             {/* About Section */}
             <div className="bg-jestr-background/50 rounded-xl p-5 shadow-sm">
-              <h3 className="font-pixel text-base text-white mb-3">
+              <h3 className="font-pixel text-xl text-white mb-4">
                 About This Pre-sale
               </h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
@@ -241,6 +233,28 @@ export default async function JestDetail({ params }: JestDetailProps) {
                 launched and distributed to contributors proportionally to their
                 contribution. If the goal is not reached, all contributions will
                 be refunded.
+              </p>
+
+              <h4 className="font-pixel text-lg text-white mt-5 mb-3">
+                How to Participate
+              </h4>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                To participate in the presale you must:
+              </p>
+              <ul className="text-sm text-muted-foreground list-disc pl-5 mt-2 space-y-1">
+                <li>Be added to the whitelist</li>
+                <li>Have an active, funded Jester wallet</li>
+                <li>
+                  Comment on the X presale post (
+                  <Link href="#" className="text-jestr-blue hover:underline">
+                    link
+                  </Link>
+                  ) with the word "contribute"
+                </li>
+              </ul>
+              <p className="text-sm text-muted-foreground mt-2">
+                Tag <span className="text-jestr-blue">@jestrbot</span> on X if
+                you have any questions!
               </p>
             </div>
           </CardContent>
