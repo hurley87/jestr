@@ -21,21 +21,23 @@ export default async function Home() {
       <main className="flex-1 container px-4 py-6 mx-auto">
         {/* Launched Tokens Section */}
         <section className="mb-8 md:mb-12">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4 sm:mb-6">
-            <h2 className="font-pixel text-3xl sm:text-4xl md:text-5xl text-white">
-              Top Tokens
-            </h2>
-            <Link href="/tokens">
-              <Button
-                variant="outline"
-                className="text-jestr-blue border-jestr-blue bg-black group"
-              >
-                <span className="group-hover:text-white cursor-pointer">
-                  View All
-                </span>
-              </Button>
-            </Link>
-          </div>
+          {launchedTokens.length > 0 && (
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4 sm:mb-6">
+              <h2 className="font-pixel text-3xl sm:text-4xl md:text-5xl text-white">
+                Top Tokens
+              </h2>
+              <Link href="/tokens">
+                <Button
+                  variant="outline"
+                  className="text-jestr-blue border-jestr-blue bg-black group"
+                >
+                  <span className="group-hover:text-white cursor-pointer">
+                    View All
+                  </span>
+                </Button>
+              </Link>
+            </div>
+          )}
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
             {launchedTokens.map((token) => (
