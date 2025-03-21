@@ -128,16 +128,22 @@ export default async function JestDetail({ params }: JestDetailProps) {
                       by
                     </span>
                     <Link
-                      href={`#`}
+                      href={`https://x.com/${token?.ownerTwitterId}/status/${token?.creationTweetId}`}
                       className="text-base text-jestr-blue hover:underline"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      USERNAME
+                      <span className="flex items-center gap-2">
+                        <Image
+                          src={token?.ownerTwitterPfpUrl || ''}
+                          alt={token?.ownerTwitterId || ''}
+                          width={20}
+                          height={20}
+                          className="rounded-full"
+                        />
+                        {token?.ownerTwitterId} on X
+                      </span>
                     </Link>
-                    <span className="ml-2 text-base text-muted-foreground">
-                      on X
-                    </span>
                   </div>
                 </div>
 
@@ -236,7 +242,12 @@ export default async function JestDetail({ params }: JestDetailProps) {
                 <li>Have an active, funded Jester wallet</li>
                 <li>
                   Comment on the X presale post (
-                  <Link href="#" className="text-jestr-blue hover:underline">
+                  <Link
+                    href={`https://x.com/${token?.ownerTwitterId}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-jestr-blue hover:underline"
+                  >
                     link
                   </Link>
                   ) {`with the word "contribute"`}

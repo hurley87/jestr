@@ -20,4 +20,7 @@ export type Token = {
   status: Record<string, string>;
   balance: string;
   embeddedWallet: string;
+  ownerTwitterId: string;
+  ownerTwitterPfpUrl: string;
+  creationTweetId: string;
 };

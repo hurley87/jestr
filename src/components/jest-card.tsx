@@ -6,7 +6,6 @@ import { Token } from '@/types';
 import { checkPresaleExpiration } from '@/lib/utils';
 
 export async function JestCard({ jest }: { jest: Token }) {
-  console.log(jest);
   const expiration = await checkPresaleExpiration(jest.agentId);
 
   const progress = (Number(jest.balance) / 10) * 100;
@@ -52,7 +51,14 @@ export async function JestCard({ jest }: { jest: Token }) {
                   ${jest.metadata.symbol}
                 </span>
                 <span className="mx-1 text-muted-foreground">by</span>
-                <span className="text-jestr-blue truncate">USERNAME</span>
+                <Link
+                  href={`https://x.com/${jest.ownerTwitterId}/status/${jest.creationTweetId}`}
+                  className="text-jestr-blue hover:underline"
+                >
+                  <span className="text-jestr-blue truncate">
+                    {jest.ownerTwitterId}
+                  </span>
+                </Link>
               </div>
             </div>
           </div>
