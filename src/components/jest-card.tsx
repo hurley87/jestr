@@ -24,6 +24,7 @@ export function JestCard({ jest }: { jest: Token }) {
       await navigator.clipboard.writeText(jest.publicKey);
       toast.success('CA copied to clipboard!');
     } catch (error) {
+      console.error(error);
       toast.error('Failed to copy to clipboard');
     }
   };
