@@ -7,6 +7,9 @@ const nextConfig: NextConfig = {
       'pink-changing-earwig-765.mypinata.cloud',
       'pbs.twimg.com',
       'via.placeholder.com',
+      't.co',
+      'i.ytimg.com',
+      'circus.fun',
     ],
   },
 };
