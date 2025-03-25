@@ -24,4 +24,5 @@ export type Token = {
   ownerTwitterId: string;
   ownerTwitterPfpUrl: string;
   creationTweetId: string;
+  createdAt: string; // ISO string timestamp
 };
