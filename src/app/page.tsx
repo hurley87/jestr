@@ -10,14 +10,7 @@ export default async function Home() {
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
-
-      <main className="flex-1 container px-4 py-6 mx-auto">
-        {/* Tokens */}
-        <section>
-          <TokenList initialTokens={activeJests} />
-        </section>
-      </main>
-
+      <TokenList initialTokens={activeJests} />
       <Footer />
     </div>
   );

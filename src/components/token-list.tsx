@@ -26,13 +26,13 @@ export function TokenList({ initialTokens }: TokenListProps) {
   };
 
   return (
-    <>
+    <main className="flex-1 container px-4 py-6 mx-auto">
       <SearchBar onSearch={handleSearch} />
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
         {filteredTokens.map((jest) => (
           <JestCard key={jest.id} jest={jest} />
         ))}
       </div>
-    </>
+    </main>
   );
 }
