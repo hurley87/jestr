@@ -23,6 +23,8 @@ export async function fetchAllTokens(
 
     const data = await response.json();
 
+    console.log(data);
+
     return {
       tokens: data.agents.map((agent: Token) => ({
         id: agent.agentId,
@@ -38,6 +40,9 @@ export async function fetchAllTokens(
           description: agent.metadata.description || '',
           attributes: agent.metadata.attributes || [],
         },
+        creationTweetId: agent.creationTweetId || '',
+        ownerTwitterId: agent.ownerTwitterId || '',
+        ownerTwitterPfpUrl: agent.ownerTwitterPfpUrl || '',
         running: agent.running || false,
         isGraduated: agent.isGraduated || false,
         isPresaleActive: agent.isPresaleActive || false,

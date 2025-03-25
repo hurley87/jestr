@@ -3,13 +3,31 @@ import type { NextConfig } from 'next';
 const nextConfig: NextConfig = {
   /* config options here */
   images: {
-    domains: [
-      'pink-changing-earwig-765.mypinata.cloud',
-      'pbs.twimg.com',
-      'via.placeholder.com',
-      't.co',
-      'i.ytimg.com',
-      'circus.fun',
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'pink-changing-earwig-765.mypinata.cloud',
+      },
+      {
+        protocol: 'https',
+        hostname: 'pbs.twimg.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'via.placeholder.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 't.co',
+      },
+      {
+        protocol: 'https',
+        hostname: 'i.ytimg.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'circus.fun',
+      },
     ],
   },
 };

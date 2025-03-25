@@ -3,6 +3,7 @@ import { Inter, VT323 } from 'next/font/google';
 import './globals.css';
 import { Providers } from './providers';
 import '@fortawesome/fontawesome-svg-core/styles.css';
+import { Toaster } from '@/components/ui/sonner';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -35,6 +36,7 @@ export default function RootLayout({
         className={`${inter.variable} ${pixel.variable} antialiased font-sans bg-jestr-background text-white`}
       >
         <Providers>{children}</Providers>
+        <Toaster richColors={true} position="top-center" />
       </body>
     </html>
   );
