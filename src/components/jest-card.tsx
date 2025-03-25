@@ -5,7 +5,10 @@ import { Token } from '@/types';
 
 export function JestCard({ jest }: { jest: Token }) {
   return (
-    <Link href={`/jest/${jest.ownerPublicKey}/${jest.agentId}`}>
+    <Link
+      href={`https://dexscreener.com/solana/${jest.publicKey}`}
+      target="_blank"
+    >
       <Card
         className={`gameboy-container overflow-hidden transition-all duration-300 hover:scale-105 hover:rotate-1 hover:shadow-lg`}
       >
