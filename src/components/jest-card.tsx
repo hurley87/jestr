@@ -60,7 +60,7 @@ export function JestCard({ jest }: { jest: Token }) {
               </div>
               <div className="flex flex-col gap-1">
                 <div className="flex w-full justify-between">
-                  <div className="w-full flex flex-col">
+                  <div className="w-full flex flex-col pb-1">
                     <span className="text-gray-400 font-medium truncate text-xs">
                       Market Cap
                     </span>
