@@ -16,9 +16,17 @@ export function TokenList({ initialTokens }: TokenListProps) {
   const filteredTokens = useMemo(() => {
     if (!searchQuery) return initialTokens;
 
-    return initialTokens.filter((token) =>
-      token.metadata.name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+    const query = searchQuery.toLowerCase();
+    return initialTokens.filter((token) => {
+      const nameMatch = token.metadata.name.toLowerCase().includes(query);
+      const symbolMatch = token.metadata.symbol.toLowerCase().includes(query);
+      const publicKeyMatch = token.publicKey?.toLowerCase().includes(query);
+      const ownerPublicKeyMatch = token.ownerPublicKey
+        .toLowerCase()
+        .includes(query);
+
+      return nameMatch || symbolMatch || publicKeyMatch || ownerPublicKeyMatch;
+    });
   }, [initialTokens, searchQuery]);
 
   const handleSearch = (query: string) => {

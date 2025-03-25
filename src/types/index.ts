@@ -13,6 +13,7 @@ export type Token = {
   id: string;
   agentId: string;
   ownerPublicKey: string;
+  publicKey?: string;
   metadata: TokenMetadata;
   running: boolean;
   isGraduated: boolean;

@@ -22,7 +22,7 @@ export function SearchBar({ onSearch }: SearchBarProps) {
       <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
       <Input
         type="search"
-        placeholder="Search tokens by name..."
+        placeholder="Search by name, symbol, or public key..."
         className="pl-10 bg-jestr-card border-jestr-border text-white placeholder:text-muted-foreground focus:border-jestr-yellow focus:ring-jestr-yellow"
         value={query}
         onChange={handleSearch}
