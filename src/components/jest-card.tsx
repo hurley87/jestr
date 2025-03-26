@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { toast } from 'sonner';
 import { Token } from '@/types';
 import { useCallback, useEffect, useState } from 'react';
+import { cn } from '@/lib/utils';
 
 interface MarketData {
   marketCap: number;
@@ -31,7 +32,12 @@ const getMarketData = async (publicKey: string): Promise<MarketData | null> => {
   }
 };
 
-export function JestCard({ jest }: { jest: Token }) {
+interface JestCardProps {
+  jest: Token;
+  shouldShake?: boolean;
+}
+
+export function JestCard({ jest, shouldShake }: JestCardProps) {
   const [marketData, setMarketData] = useState<MarketData | null>(null);
 
   useEffect(() => {
@@ -96,7 +102,10 @@ export function JestCard({ jest }: { jest: Token }) {
   return (
     <Card
       onClick={handleCardClick}
-      className={`gameboy-container overflow-hidden transition-all duration-300 hover:scale-105 hover:rotate-1 hover:shadow-lg relative cursor-pointer`}
+      className={cn(
+        'gameboy-container overflow-hidden transition-all duration-300 hover:scale-105 hover:rotate-1 hover:shadow-lg relative cursor-pointer',
+        shouldShake && 'animate-shake'
+      )}
     >
       <CardContent className="p-0.5">
         <div className="flex gap-4">

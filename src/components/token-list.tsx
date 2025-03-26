@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Token } from '@/types';
 import { JestCard } from '@/components/jest-card';
 import { SearchBar } from '@/components/search-bar';
@@ -10,14 +10,15 @@ interface TokenListProps {
 }
 
 export function TokenList({ initialTokens }: TokenListProps) {
-  console.log(initialTokens);
   const [searchQuery, setSearchQuery] = useState('');
+  const [shuffledTokens, setShuffledTokens] = useState(initialTokens);
+  const [shakeIndex, setShakeIndex] = useState<number | null>(null);
 
   const filteredTokens = useMemo(() => {
-    if (!searchQuery) return initialTokens;
+    if (!searchQuery) return shuffledTokens;
 
     const query = searchQuery.toLowerCase();
-    return initialTokens.filter((token) => {
+    return shuffledTokens.filter((token) => {
       const nameMatch = token.metadata.name.toLowerCase().includes(query);
       const symbolMatch = token.metadata.symbol.toLowerCase().includes(query);
       const publicKeyMatch = token.publicKey?.toLowerCase().includes(query);
@@ -27,7 +28,28 @@ export function TokenList({ initialTokens }: TokenListProps) {
 
       return nameMatch || symbolMatch || publicKeyMatch || ownerPublicKeyMatch;
     });
-  }, [initialTokens, searchQuery]);
+  }, [shuffledTokens, searchQuery]);
+
+  useEffect(() => {
+    const shuffleTokens = () => {
+      const newTokens = [...shuffledTokens];
+      for (let i = newTokens.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [newTokens[i], newTokens[j]] = [newTokens[j], newTokens[i]];
+      }
+      setShuffledTokens(newTokens);
+      setShakeIndex(0);
+
+      // Reset shake index after animation completes
+      setTimeout(() => {
+        setShakeIndex(null);
+      }, 500);
+    };
+
+    const intervalId = setInterval(shuffleTokens, 3000);
+
+    return () => clearInterval(intervalId);
+  }, [shuffledTokens]);
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);
@@ -37,8 +59,12 @@ export function TokenList({ initialTokens }: TokenListProps) {
     <main className="flex-1 container px-4 py-6 mx-auto">
       <SearchBar onSearch={handleSearch} />
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
-        {filteredTokens.map((jest) => (
-          <JestCard key={jest.id} jest={jest} />
+        {filteredTokens.map((jest, index) => (
+          <JestCard
+            key={jest.id}
+            jest={jest}
+            shouldShake={shakeIndex === index}
+          />
         ))}
       </div>
     </main>
