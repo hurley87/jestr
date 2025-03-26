@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { toast } from 'sonner';
 import { Token } from '@/types';
 import { useCallback, useEffect, useState } from 'react';
-import { cn } from '@/lib/utils';
 import { ShakeWrapper } from '@/components/shake-wrapper';
 
 interface MarketData {
