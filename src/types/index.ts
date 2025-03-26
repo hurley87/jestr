@@ -25,4 +25,8 @@ export type Token = {
   ownerTwitterPfpUrl: string;
   creationTweetId: string;
   createdAt: string; // ISO string timestamp
+  dlmmPoolInfo: {
+    baseMint: string;
+    poolAddress: string;
+  };
 };

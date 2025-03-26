@@ -23,13 +23,13 @@ export async function fetchAllTokens(
 
     const data = await response.json();
 
-    console.log(data);
-
     return {
       tokens: data.agents.map((agent: Token) => ({
         id: agent.agentId,
         agentId: agent.agentId,
         ownerPublicKey: agent.ownerPublicKey,
+        publicKey: agent.dlmmPoolInfo.baseMint,
+        poolAddress: agent.dlmmPoolInfo.poolAddress,
         metadata: {
           name: agent.metadata.name || 'Unknown Token',
           image:
