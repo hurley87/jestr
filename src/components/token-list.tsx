@@ -13,6 +13,9 @@ export function TokenList({ initialTokens }: TokenListProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [shuffledTokens, setShuffledTokens] = useState(initialTokens);
   const [shakeIndex, setShakeIndex] = useState<number | null>(null);
+  const [previousFirstTokenId, setPreviousFirstTokenId] = useState<
+    string | null
+  >(null);
 
   const filteredTokens = useMemo(() => {
     if (!searchQuery) return shuffledTokens;
@@ -33,11 +36,23 @@ export function TokenList({ initialTokens }: TokenListProps) {
   useEffect(() => {
     const shuffleTokens = () => {
       const newTokens = [...shuffledTokens];
-      for (let i = newTokens.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [newTokens[i], newTokens[j]] = [newTokens[j], newTokens[i]];
-      }
+      let attempts = 0;
+      const maxAttempts = 10; // Prevent infinite loop
+
+      do {
+        // Fisher-Yates shuffle
+        for (let i = newTokens.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [newTokens[i], newTokens[j]] = [newTokens[j], newTokens[i]];
+        }
+        attempts++;
+      } while (
+        newTokens[0].id === previousFirstTokenId &&
+        attempts < maxAttempts
+      );
+
       setShuffledTokens(newTokens);
+      setPreviousFirstTokenId(newTokens[0].id);
       setShakeIndex(0);
 
       // Reset shake index after animation completes
@@ -49,7 +64,7 @@ export function TokenList({ initialTokens }: TokenListProps) {
     const intervalId = setInterval(shuffleTokens, 3000);
 
     return () => clearInterval(intervalId);
-  }, [shuffledTokens]);
+  }, [shuffledTokens, previousFirstTokenId]);
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);
