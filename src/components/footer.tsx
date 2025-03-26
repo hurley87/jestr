@@ -1,14 +1,14 @@
-import Link from "next/link"
+import Link from 'next/link';
 
 export function Footer() {
   return (
     <footer className="border-t border-border/40 bg-jestr-background py-6">
       <div className="container flex flex-col items-center justify-center gap-4 md:flex-row md:justify-between mx-auto">
         <p className="text-center text-sm text-muted-foreground">
-          &copy; {new Date().getFullYear()} Jestr.world. All rights reserved.
+          &copy; {new Date().getFullYear()} Jestr.fun. All rights reserved.
         </p>
         <p className="text-center text-xs text-muted-foreground">
-          Built by{" "}
+          Built by{' '}
           <Link
             href="https://circus.fun"
             target="_blank"
@@ -20,6 +20,5 @@ export function Footer() {
         </p>
       </div>
     </footer>
-  )
+  );
 }
-
