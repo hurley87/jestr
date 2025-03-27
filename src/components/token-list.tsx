@@ -109,7 +109,7 @@ export function TokenList({ initialTokens }: TokenListProps) {
             metadata: {
               name: 'Jest',
               symbol: 'JEST',
-              image: 'https://jestr.fun/logo.jpg',
+              image: 'https://www.jestr.fun/logo.jpg',
               attributes: [],
               description: 'Jest is a fun token on Solana',
             },
