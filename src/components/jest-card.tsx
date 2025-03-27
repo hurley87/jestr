@@ -2,11 +2,10 @@
 
 import { Card, CardContent } from '@/components/ui/card';
 import Image from 'next/image';
-import { toast } from 'sonner';
 import { Token } from '@/types';
 import { useCallback, useEffect, useState } from 'react';
 import { ShakeWrapper } from '@/components/shake-wrapper';
-
+import Link from 'next/link';
 interface MarketData {
   marketCap: number;
   volume: {
@@ -51,20 +50,6 @@ export function JestCard({ jest, shouldShake }: JestCardProps) {
     fetchMarketData();
   }, [jest?.publicKey]);
 
-  const handleCardClick = useCallback(async () => {
-    try {
-      if (!jest.publicKey) {
-        toast.error('No CA available');
-        return;
-      }
-      await navigator.clipboard.writeText(jest.publicKey);
-      toast.success('CA copied to clipboard!');
-    } catch (error) {
-      console.error(error);
-      toast.error('Failed to copy to clipboard');
-    }
-  }, [jest.publicKey]);
-
   const formatMarketCap = useCallback((marketCap: number) => {
     return marketCap.toLocaleString('en-US', {
       style: 'currency',
@@ -103,12 +88,7 @@ export function JestCard({ jest, shouldShake }: JestCardProps) {
 
   return (
     <ShakeWrapper shouldShake={shouldShake}>
-      <Card
-        onClick={handleCardClick}
-        className={`gameboy-container overflow-hidden transition-all duration-300 hover:scale-105 hover:rotate-1 hover:shadow-lg relative cursor-pointer ${
-          marketData ? 'shadow-lg shadow-green-500' : ''
-        }`}
-      >
+      <Card className={`gameboy-container overflow-hidden`}>
         <CardContent className="p-0.5">
           <div className="flex gap-4">
             {/* Left column - Image */}
@@ -137,7 +117,11 @@ export function JestCard({ jest, shouldShake }: JestCardProps) {
 
             {/* Right column - Content */}
             <div className="w-1/2 flex flex-col justify-between">
-              <div className="flex-1 min-w-0">
+              <Link
+                href={`https://dexscreener.com/solana/${jest.publicKey}`}
+                target="_blank"
+                className="flex-1 min-w-0 transition-all duration-300 hover:scale-105 hover:rotate-1 relative cursor-pointer "
+              >
                 <div className="flex items-center">
                   <span className="text-jestr-yellow font-medium truncate text-xs">
                     ${jest.metadata.symbol}
@@ -146,7 +130,7 @@ export function JestCard({ jest, shouldShake }: JestCardProps) {
                 <h3 className="font-pixel text-lg sm:text-xl md:text-2xl text-white truncate">
                   {jest.metadata.name}
                 </h3>
-              </div>
+              </Link>
               <div className="flex flex-col gap-1">
                 <div className="flex flex-col gap-2 w-full justify-between pb-2">
                   {marketData && (
@@ -179,16 +163,21 @@ export function JestCard({ jest, shouldShake }: JestCardProps) {
                     </div>
                   )}
                 </div>
-                <div className="flex gap-2 items-center">
-                  <img
-                    src={jest.ownerTwitterPfpUrl}
-                    className="h-5 w-5 rounded-full bg-gray-400"
-                    alt={jest.ownerTwitterId}
-                  />
-                  <span className="text-gray-400 font-medium truncate text-sm">
-                    {jest.ownerTwitterId}
-                  </span>
-                </div>
+                <Link
+                  href={`https://twitter.com/${jest.ownerTwitterId}/status/${jest.creationTweetId}`}
+                  target="_blank"
+                >
+                  <div className="flex gap-2 items-center  transition-all duration-300 hover:scale-105 hover:rotate-1 relative cursor-pointer ">
+                    <img
+                      src={jest.ownerTwitterPfpUrl}
+                      className="h-5 w-5 rounded-full bg-gray-400"
+                      alt={jest.ownerTwitterId}
+                    />
+                    <span className="text-gray-400 font-medium truncate text-sm">
+                      {jest.ownerTwitterId}
+                    </span>
+                  </div>
+                </Link>
               </div>
             </div>
           </div>
