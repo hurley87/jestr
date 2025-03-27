@@ -4,7 +4,7 @@ import { useState, useMemo, useEffect } from 'react';
 import { Token } from '@/types';
 import { JestCard } from '@/components/jest-card';
 import { SearchBar } from '@/components/search-bar';
-import { Button } from '@/components/ui/button';
+// import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 
 interface TokenListProps {
@@ -35,6 +35,7 @@ export function TokenList({ initialTokens }: TokenListProps) {
             const hasMarketData = response.ok;
             return { ...token, hasMarketData };
           } catch (error) {
+            console.error(error);
             return { ...token, hasMarketData: false };
           }
         })
