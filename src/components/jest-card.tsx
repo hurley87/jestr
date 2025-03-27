@@ -97,22 +97,25 @@ export function JestCard({ jest, shouldShake }: JestCardProps) {
     return `${diffInMinutes} minute${diffInMinutes !== 1 ? 's' : ''} ago`;
   }, []);
 
-  if (!marketData) return null;
-
   return (
     <ShakeWrapper shouldShake={shouldShake}>
       <Card
         onClick={handleCardClick}
-        className="gameboy-container overflow-hidden transition-all duration-300 hover:scale-105 hover:rotate-1 hover:shadow-lg relative cursor-pointer"
+        className={`gameboy-container overflow-hidden transition-all duration-300 hover:scale-105 hover:rotate-1 hover:shadow-lg relative cursor-pointer ${
+          marketData ? 'shadow-lg shadow-green-500' : ''
+        }`}
       >
         <CardContent className="p-0.5">
           <div className="flex gap-4">
             {/* Left column - Image */}
-            <div className="absolute top-3 right-3 z-10">
-              <span className="text-xs text-gray-400">
-                {getTimeAgo(marketData.pairCreatedAt)}
-              </span>
-            </div>
+            {marketData && (
+              <div className="absolute top-3 right-3 z-10">
+                <span className="text-xs text-gray-400">
+                  {getTimeAgo(marketData.pairCreatedAt)}
+                </span>
+              </div>
+            )}
+
             <div className="w-1/2 flex items-center justify-center">
               <div className="relative aspect-square w-full rounded-none overflow-hidden border-2 border-black">
                 <Image
@@ -142,31 +145,35 @@ export function JestCard({ jest, shouldShake }: JestCardProps) {
               </div>
               <div className="flex flex-col gap-1">
                 <div className="flex flex-col gap-2 w-full justify-between pb-2">
-                  <div className="w-full flex flex-col pb-1">
-                    <span className="text-gray-400 font-medium truncate text-xs">
-                      Market Cap
-                    </span>
-                    <span className="text-white font-medium truncate text-xs">
-                      {formatMarketCap(marketData?.marketCap || 0)}{' '}
-                      <span
-                        className={`${
-                          marketData?.priceChange.h24 > 0
-                            ? 'text-green-500'
-                            : 'text-red-500'
-                        }`}
-                      >
-                        ({marketData?.priceChange.h24}%)
+                  {marketData && (
+                    <div className="w-full flex flex-col pb-1">
+                      <span className="text-gray-400 font-medium truncate text-xs">
+                        Market Cap
                       </span>
-                    </span>
-                  </div>
-                  <div className="w-full flex flex-col">
-                    <span className="text-gray-400 font-medium truncate text-xs">
-                      24h Volume
-                    </span>
-                    <span className="text-white font-medium truncate text-xs">
-                      {formatVolume(marketData?.volume.h24 || 0)}
-                    </span>
-                  </div>
+                      <span className="text-white font-medium truncate text-xs">
+                        {formatMarketCap(marketData?.marketCap || 0)}{' '}
+                        <span
+                          className={`${
+                            marketData?.priceChange.h24 > 0
+                              ? 'text-green-500'
+                              : 'text-red-500'
+                          }`}
+                        >
+                          ({marketData?.priceChange.h24}%)
+                        </span>
+                      </span>
+                    </div>
+                  )}
+                  {marketData && (
+                    <div className="w-full flex flex-col">
+                      <span className="text-gray-400 font-medium truncate text-xs">
+                        24h Volume
+                      </span>
+                      <span className="text-white font-medium truncate text-xs">
+                        {formatVolume(marketData?.volume.h24 || 0)}
+                      </span>
+                    </div>
+                  )}
                 </div>
                 <div className="flex gap-2 items-center">
                   <img
