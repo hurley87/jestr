@@ -32,6 +32,10 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'jest.fun',
       },
+      {
+        protocol: 'https',
+        hostname: 'www.jestr.fun',
+      },
     ],
   },
 };
