@@ -98,8 +98,39 @@ export function TokenList({ initialTokens }: TokenListProps) {
         </div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
-        {filteredTokens.map((jest, index) => (
-          <JestCard key={jest.id} jest={jest} shouldShake={1 === index} />
+        <JestCard
+          jest={{
+            id: '1',
+            agentId: '1',
+            running: true,
+            isGraduated: true,
+            publicKey: 'HrevD5UrqgEGBeiNuddMJfKaMUvAyoNCpASPjaMqJuTN',
+            ownerPublicKey: 'HrevD5UrqgEGBeiNuddMJfKaMUvAyoNCpASPjaMqJuTN',
+            metadata: {
+              name: 'Jest',
+              symbol: 'JEST',
+              image: 'https://jest.fun/logo.jpg',
+              attributes: [],
+              description: 'Jest is a fun token on Solana',
+            },
+            isPresaleActive: true,
+            status: {},
+            balance: '1000',
+            embeddedWallet: '',
+            ownerTwitterId: 'BryKayne',
+            ownerTwitterPfpUrl:
+              'https://pbs.twimg.com/profile_images/1901611354819317760/05rb0R1H_normal.jpg',
+            creationTweetId: '1904309952685994006',
+            dlmmPoolInfo: {
+              poolAddress: 'HrevD5UrqgEGBeiNuddMJfKaMUvAyoNCpASPjaMqJuTN',
+              baseMint: 'HrevD5UrqgEGBeiNuddMJfKaMUvAyoNCpASPjaMqJuTN',
+            },
+            createdAt: '2021-01-01',
+          }}
+          shouldShake={true}
+        />
+        {filteredTokens.map((jest) => (
+          <JestCard key={jest.id} jest={jest} shouldShake={false} />
         ))}
       </div>
     </main>
