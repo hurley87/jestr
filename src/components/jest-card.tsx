@@ -40,6 +40,8 @@ interface JestCardProps {
 export function JestCard({ jest, shouldShake }: JestCardProps) {
   const [marketData, setMarketData] = useState<MarketData | null>(null);
 
+  console.log('jest', jest);
+
   useEffect(() => {
     const fetchMarketData = async () => {
       const data = await getMarketData(jest?.publicKey || '');
@@ -96,6 +98,8 @@ export function JestCard({ jest, shouldShake }: JestCardProps) {
 
     return `${diffInMinutes} minute${diffInMinutes !== 1 ? 's' : ''} ago`;
   }, []);
+
+  if (!jest.publicKey) return null;
 
   return (
     <ShakeWrapper shouldShake={shouldShake}>
